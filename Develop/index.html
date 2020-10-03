@@ -27,11 +27,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
   <script>
-    // GIVEN I am using a daily planner to create a schedule
-    // WHEN I open the planner
-    // THEN the current day is displayed at the top of the calendar
+    // set current day and time 
     $("#currentDay").text(moment().format("dddd, MMMM Do YYYY, h:mm a"));
 
+    // for loop to create the main content 
     for (let i = 0; i < 9; i++) {
       // rows 
       let newRow = $("<div>");
@@ -68,43 +67,37 @@
         type: "text",
         id: "input-text"
       });
-      // userInputText.addClass("form-control");
       userInputForm.append(userInputText);
       inputColumn.append(userInputForm);
+      // check if there is data saved to localStorage and if so get it and add it to the correct row
+      if (localStorage.getItem(i) === null) {
+        userInputText.text("");
+      } else {
+        userInputText.text(localStorage.getItem(i));
+      }
 
       // saveButtonColumn
-      let saveButton = $("<button>");
-      saveButton.addClass("col-1 saveBtn");
+      let saveButtonColumn = $("<button>");
+      saveButtonColumn.addClass("col-1 saveBtn");
       let saveIcon = $("<i>");
       saveIcon.addClass("far fa-save");
+      saveIcon.attr("button-data-index", i);
       // append 
-      saveButton.append(saveIcon);
-      newRow.append(hourColumn, inputColumn, saveButton);
+      saveButtonColumn.append(saveIcon);
+      newRow.append(hourColumn, inputColumn, saveButtonColumn);
       $(".container").append(newRow);
     }
+
+    // save button event listener
+    $("i").on("click", function (event) {
+      event.preventDefault();
+      if (event.target.matches("i")) {
+        var buttonIndex = event.target.getAttribute("button-data-index");
+        var textInput = event.target.parentElement.previousElementSibling.lastChild.childNodes[0].value;
+        localStorage.setItem(buttonIndex, textInput);
+      }
+    });
   </script>
-
-
-  <!-- README.md
-## Acceptance Criteria
-
-```
-GIVEN I am using a daily planner to create a schedule
-WHEN I open the planner
-THEN the current day is displayed at the top of the calendar
-
-WHEN I scroll down
-THEN I am presented with time blocks for standard business hours
-WHEN I view the time blocks for that day
-THEN each time block is color-coded to indicate whether it is in the past, present, or future
-WHEN I click into a time block
-THEN I can enter an event
-WHEN I click the save button for that time block
-THEN the text for that event is saved in local storage
-WHEN I refresh the page
-THEN the saved events persist -->
-
-
 </body>
 
 </html>
