@@ -33,9 +33,9 @@
     $("#currentDay").text(moment().format("dddd, MMMM Do YYYY, h:mm a"));
 
     for (let i = 0; i < 9; i++) {
+      // rows 
       let newRow = $("<div>");
       newRow.addClass("row");
-      // columns
       // hourColumn
       let hourColumn = $("<div>");
       hourColumn.addClass("col-1 hour");
@@ -54,7 +54,6 @@
       inputColumn.addClass("col-10");
       let currentHour = moment().format("H");
       let currentWorkHour = parseInt(hourColumn.attr("work-hour"));
-
       if (currentWorkHour < currentHour) {
         inputColumn.addClass("past");
       } else if (currentWorkHour > currentHour) {
@@ -62,10 +61,24 @@
       } else if (currentWorkHour === currentHour) {
         inputColumn.addClass("present");
       }
+      //form for user input
+      let userInputForm = $("<form>");
+      let userInputText = $("<textarea>");
+      userInputText.attr({
+        type: "text",
+        id: "input-text"
+      });
+      // userInputText.addClass("form-control");
+      userInputForm.append(userInputText);
+      inputColumn.append(userInputForm);
+
       // saveButtonColumn
-      let saveButton = $("<div>");
+      let saveButton = $("<button>");
       saveButton.addClass("col-1 saveBtn");
-      // append
+      let saveIcon = $("<i>");
+      saveIcon.addClass("far fa-save");
+      // append 
+      saveButton.append(saveIcon);
       newRow.append(hourColumn, inputColumn, saveButton);
       $(".container").append(newRow);
     }
