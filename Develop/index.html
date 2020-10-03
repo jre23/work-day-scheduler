@@ -27,8 +27,70 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
   <script>
-    $("#currentDay").text(moment().format("dddd, MMMM Do YYYY, h:mm:ss a"));
+    // GIVEN I am using a daily planner to create a schedule
+    // WHEN I open the planner
+    // THEN the current day is displayed at the top of the calendar
+    $("#currentDay").text(moment().format("dddd, MMMM Do YYYY, h:mm a"));
+
+    for (let i = 0; i < 9; i++) {
+      let newRow = $("<div>");
+      newRow.addClass("row");
+      // columns
+      // hourColumn
+      let hourColumn = $("<div>");
+      hourColumn.addClass("col-1 hour");
+      if (i < 3) {
+        hourColumn.text(i + 9 + "AM");
+        hourColumn.attr("work-hour", i + 9);
+      } else if (i === 3) {
+        hourColumn.text("12PM");
+        hourColumn.attr("work-hour", 12);
+      } else {
+        hourColumn.text(i - 3 + "PM");
+        hourColumn.attr("work-hour", i + 9);
+      }
+      // inputColumn
+      let inputColumn = $("<div>");
+      inputColumn.addClass("col-10");
+      let currentHour = moment().format("H");
+      let currentWorkHour = parseInt(hourColumn.attr("work-hour"));
+
+      if (currentWorkHour < currentHour) {
+        inputColumn.addClass("past");
+      } else if (currentWorkHour > currentHour) {
+        inputColumn.addClass("future");
+      } else if (currentWorkHour === currentHour) {
+        inputColumn.addClass("present");
+      }
+      // saveButtonColumn
+      let saveButton = $("<div>");
+      saveButton.addClass("col-1 saveBtn");
+      // append
+      newRow.append(hourColumn, inputColumn, saveButton);
+      $(".container").append(newRow);
+    }
   </script>
+
+
+  <!-- README.md
+## Acceptance Criteria
+
+```
+GIVEN I am using a daily planner to create a schedule
+WHEN I open the planner
+THEN the current day is displayed at the top of the calendar
+
+WHEN I scroll down
+THEN I am presented with time blocks for standard business hours
+WHEN I view the time blocks for that day
+THEN each time block is color-coded to indicate whether it is in the past, present, or future
+WHEN I click into a time block
+THEN I can enter an event
+WHEN I click the save button for that time block
+THEN the text for that event is saved in local storage
+WHEN I refresh the page
+THEN the saved events persist -->
+
 
 </body>
 
