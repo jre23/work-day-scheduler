@@ -37,7 +37,7 @@
       newRow.addClass("row");
       // hourColumn
       let hourColumn = $("<div>");
-      hourColumn.addClass("col-1 hour");
+      hourColumn.addClass("col-2 col-md-1 hour");
       if (i < 3) {
         hourColumn.text(i + 9 + "AM");
         hourColumn.attr("work-hour", i + 9);
@@ -50,7 +50,7 @@
       }
       // inputColumn
       let inputColumn = $("<div>");
-      inputColumn.addClass("col-10");
+      inputColumn.addClass("col-9 col-md-10");
       let currentHour = moment().format("H");
       let currentWorkHour = parseInt(hourColumn.attr("work-hour"));
       if (currentWorkHour < currentHour) {
