@@ -20,17 +20,17 @@
     <p id="currentDay" class="lead"></p>
   </header>
   <div class="container">
-    <!-- Timeblocks go here -->
+    <!-- Time blocks go here -->
   </div>
 
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
   <script>
-    // set current day and time 
+    // get the current day and time from https://momentjs.com/ and display it to the user
     $("#currentDay").text(moment().format("dddd, MMMM Do YYYY, h:mm a"));
 
-    // for loop to create the main content 
+    // for loop to create the main content - rows, columns, user input form, and the save button
     for (let i = 0; i < 9; i++) {
       // rows 
       let newRow = $("<div>");
@@ -38,6 +38,7 @@
       // hourColumn
       let hourColumn = $("<div>");
       hourColumn.addClass("col-2 col-md-1 hour");
+      // if statements to determine the hour column text using index i. The work-hour attribute set here is used later in the code to determine if the row is in the past, present, or future
       if (i < 3) {
         hourColumn.text(i + 9 + "AM");
         hourColumn.attr("work-hour", i + 9);
@@ -51,16 +52,17 @@
       // inputColumn
       let inputColumn = $("<div>");
       inputColumn.addClass("col-9 col-md-10");
+      // get the current hour in 24-hour format from https://momentjs.com/ so it can be compared with the work-hour attribute to determine whether the row is in the past, present, or future
       let currentHour = moment().format("H");
       let currentWorkHour = parseInt(hourColumn.attr("work-hour"));
       if (currentWorkHour < currentHour) {
         inputColumn.addClass("past");
       } else if (currentWorkHour > currentHour) {
         inputColumn.addClass("future");
-      } else if (currentWorkHour === currentHour) {
+      } else {
         inputColumn.addClass("present");
       }
-      //form for user input
+      // form for user input
       let userInputForm = $("<form>");
       let userInputText = $("<textarea>");
       userInputText.attr({
@@ -77,26 +79,37 @@
       }
 
       // saveButtonColumn
-      let saveButtonColumn = $("<button>");
-      saveButtonColumn.addClass("col-1 saveBtn");
-      let saveIcon = $("<i>");
-      saveIcon.addClass("far fa-save");
-      saveIcon.attr("button-data-index", i);
-      // append 
-      saveButtonColumn.append(saveIcon);
-      newRow.append(hourColumn, inputColumn, saveButtonColumn);
+      let saveButton = $("<button>");
+      saveButton.addClass("col-1 saveBtn");
+      saveButton.attr("button-data-index", i);
+      let saveButtonIcon = $("<i>");
+      saveButtonIcon.addClass("far fa-save");
+      saveButtonIcon.attr("button-data-index", i);
+      // append the icon to the button
+      saveButton.append(saveButtonIcon);
+      // append all of the columns to the row in order
+      newRow.append(hourColumn, inputColumn, saveButton);
+      // append the row to the div container for display to the user
       $(".container").append(newRow);
     }
 
-    // save button event listener
-    $("i").on("click", function (event) {
+    // save button event listener. this listener is put specifically on the button element so event delegation can be used to also handle if the user clicks on the icon, which sits on top of the button
+    $("button").on("click", saveButtonHandler);
+    // this function handles the click event, whether it be on the icon or the blue area around the icon. this function uses an if statement to determine what the user pressed (blue area or icon) and saves the user's input to local storage
+    function saveButtonHandler(event) {
       event.preventDefault();
       if (event.target.matches("i")) {
+        console.log("i save button clicked");
         var buttonIndex = event.target.getAttribute("button-data-index");
         var textInput = event.target.parentElement.previousElementSibling.lastChild.childNodes[0].value;
         localStorage.setItem(buttonIndex, textInput);
+      } else if (event.target.matches("button")) {
+        console.log("blue save button clicked");
+        var buttonIndex = event.target.getAttribute("button-data-index");
+        var textInput = event.target.previousElementSibling.lastChild.childNodes[0].value;
+        localStorage.setItem(buttonIndex, textInput);
       }
-    });
+    }
   </script>
 </body>
 
