@@ -53,7 +53,7 @@
 
       // inputColumn
       let inputColumn = $("<div>");
-      inputColumn.addClass("col-9 col-md-10");
+      inputColumn.addClass("col-8 col-md-10");
       // get the current hour in 24-hour format from https://momentjs.com/ so it can be compared with the work-hour attribute to determine whether the row is in the past, present, or future
       let currentHour = moment().format("H");
       let currentWorkHour = parseInt(hourColumn.attr("work-hour"));
@@ -83,7 +83,7 @@
 
       // saveButtonColumn
       let saveButton = $("<button>");
-      saveButton.addClass("col-1 saveBtn");
+      saveButton.addClass("col-2 col-md-1 saveBtn");
       saveButton.attr("button-data-index", i);
       let saveButtonIcon = $("<i>");
       saveButtonIcon.addClass("far fa-save");
