@@ -12,15 +12,9 @@ The goal for this project was to build a daily planner where the user can input 
 
 ## Screenshots:
 
-![work day scheduler screenshot 1]
+![work day scheduler screenshot 1](https://user-images.githubusercontent.com/69170823/95032939-45612e80-0671-11eb-8934-b6a14dc100fb.png)
 
-![work day scheduler screenshot 2]
-
-![work day scheduler screenshot 3]
-
-![work day scheduler screenshot 4]
-
-![work day scheduler screenshot 5]
+![work day scheduler screenshot 2](https://user-images.githubusercontent.com/69170823/95032985-6fb2ec00-0671-11eb-8b11-c2509babae57.png)
 
 ## Installation
 
