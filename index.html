@@ -68,13 +68,10 @@
       // form for user input
       let userInputForm = $("<form>");
       let userInputText = $("<textarea>");
-      userInputText.attr({
-        type: "text",
-        id: "input-text"
-      });
+      userInputText.attr("type", "text");
       userInputForm.append(userInputText);
       inputColumn.append(userInputForm);
-      // check if there is data saved to localStorage and if so get it and add it to the correct row
+      // check if there is data saved to localStorage and if so, get it and add it to the correct row
       if (localStorage.getItem(i) === null) {
         userInputText.text("");
       } else {
@@ -96,7 +93,7 @@
       $(".container").append(newRow);
     }
 
-    // save button event listener. this listener is put specifically on the button element so event delegation can be used to also handle if the user clicks on the icon, which sits on top of the button
+    // save button event listener. this listener is put specifically on the button element so event delegation can be used to also handle if the user clicks on the icon, which is a child of the button element
     $("button").on("click", saveButtonHandler);
 
     // this function handles the click event, whether it be on the icon or the blue area around the icon. this function uses an if statement to determine what the user pressed (blue area or icon) and saves the user's input to local storage
