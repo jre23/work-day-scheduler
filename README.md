@@ -1,20 +1,41 @@
 # Work Day Scheduler
 
+## Table of Contents
+
+1. [Description](#Description)
+2. [GitHub Repo and Deployment](#GitHub-Repo-and-Deployment)
+3. [Screenshots](#Screenshots)
+4. [Technologies](#Technologies)
+5. [Installation](#Installation)
+6. [Usage](#Usage)
+7. [Credits](#Credits)
+
 ## Description
 
 The goal for this project was to build a daily planner where the user can input events for the different standard business hours. If the user wants to save their events, then they'd hit the save button and events are stored in local storage for persistance. The time blocks are color coded according to the current time of the day and whether they are in the past, present, or future.
 
-## Check it out here! 
+## CGitHub Repo and Deployment
 
 [GitHub repo](https://github.com/jre23/work-day-scheduler)
 
 [Deployed on GitHub pages](https://jre23.github.io/work-day-scheduler)
 
-## Screenshots:
+## Screenshots
 
 ![work day scheduler screenshot 1](https://user-images.githubusercontent.com/69170823/95032939-45612e80-0671-11eb-8934-b6a14dc100fb.png)
 
 ![work day scheduler screenshot 2](https://user-images.githubusercontent.com/69170823/95032985-6fb2ec00-0671-11eb-8b11-c2509babae57.png)
+
+## Technologies
+
+Please see the following for a list of technologies used in this project:
+
+* HTML
+* CSS
+* Bootstrap
+* JavaScript
+* jQuery
+* momentjs 
 
 ## Installation
 
