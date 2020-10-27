@@ -14,7 +14,7 @@
 
 The goal for this project was to build a daily planner where the user can input events for the different standard business hours. If the user wants to save their events, then they'd hit the save button and events are stored in local storage for persistance. The time blocks are color coded according to the current time of the day and whether they are in the past, present, or future.
 
-## CGitHub Repo and Deployment
+## GitHub Repo and Deployment
 
 [GitHub repo](https://github.com/jre23/work-day-scheduler)
 
